@@ -1,0 +1,33 @@
+{
+  "name": "color-sheet",
+  "version": "0.0.0",
+  "description": "A Spreadsheet-like Color Workbook",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^4.0.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shanfan/color-sheet.git"
+  },
+  "keywords": [
+    "designer",
+    "prototyping",
+    "tools"
+  ],
+  "author": "Shanfan Huang <shanfan.huang@gmail.com> (http://shanfanhuang.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shanfan/color-sheet/issues"
+  },
+  "homepage": "https://github.com/Shanfan/color-sheet#readme"
+}
