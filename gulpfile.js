@@ -16,7 +16,7 @@ gulp.task('connect', function() {
 // Compile Stylesheets
 gulp.task('css', function () {
   var processors = [ autoprefixer({browsers: ['last 1 version']}) ];
-    return gulp.src('./scss/all.scss')
+    return gulp.src('./scss/app.scss')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(processors))
