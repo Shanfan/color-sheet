@@ -1,4 +1,14 @@
-input {
+#color-sheet {
   font-size: 20px; }
+  #color-sheet .hex-input {
+    background: transparent;
+    font-size: 1em;
+    border: none; }
+    #color-sheet .hex-input:focus {
+      outline: none; }
+  #color-sheet .swatch {
+    transition: all 1s; }
+    #color-sheet .swatch:before {
+      content: "#"; }
 
 /*# sourceMappingURL=app.css.map */
