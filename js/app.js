@@ -6,8 +6,8 @@
     // I have 2 inputs: start and end. Both behave the same as specified in #1.
 
 window.onload = function(){
-  createSwatchInput('#color-sheet', 'start', 'aaa');
-  createSwatchInput('#color-sheet', 'end', 'bbb');
+  createSwatchInput('#color-sheet', 'start', '055aaa');
+  createSwatchInput('#color-sheet', 'end', 'bbb334');
   interpolateSwatch('#start', '#end', 5);
 }
 
@@ -50,7 +50,7 @@ function interpolateSwatch(selector_1, selector_2, step) {
   var end = document.querySelector(selector_2);
   var interpolationList = chroma.scale([start.dataset.color, end.dataset.color]).colors(step);
 
-  for (var i = 0; i < step; i++){
+  for (var i = 1; i < step-1; i++){
     var co = interpolationList[i];
     var wrapper = document.createElement('div');
 
