@@ -1,19 +1,46 @@
-#color-sheet {
-  font-size: 20px;
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,600);
 
-  .hex-input {
-    background: transparent;
-    font-size: 1em;
-    border: none;
-    &:focus {
-      outline: none;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 20px;
+  font-family: 'Source Code Pro', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+#color-sheet {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  div[class ^= swatch] {
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 1s;
+    border: 1px solid white;
+    &:before {
+      content: "#";
     }
   }
 
-  .swatch {
-    transition: all 1s;
-    &:before {
-      content: "#";
+  .hex-input {
+    font-size: 1.2em;
+    padding: 0.3em 0em 0.25em 0.25em;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    &:focus {
+      outline: none;
+      background: rgba(0, 0, 0, 0.15);
+      border-color: white;
     }
   }
 }

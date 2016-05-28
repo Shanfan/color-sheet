@@ -1,14 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,600);
+* {
+  box-sizing: border-box; }
+
+body {
+  font-size: 20px;
+  font-family: 'Source Code Pro', sans-serif;
+  text-transform: uppercase;
+  margin: 0; }
+
 #color-sheet {
-  font-size: 20px; }
-  #color-sheet .hex-input {
-    background: transparent;
-    font-size: 1em;
-    border: none; }
-    #color-sheet .hex-input:focus {
-      outline: none; }
-  #color-sheet .swatch {
-    transition: all 1s; }
-    #color-sheet .swatch:before {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  #color-sheet div[class^=swatch] {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s;
+    border: 1px solid white; }
+    #color-sheet div[class^=swatch]:before {
       content: "#"; }
+  #color-sheet .hex-input {
+    font-size: 1.2em;
+    padding: 0.3em 0em 0.25em 0.25em;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    text-transform: uppercase; }
+    #color-sheet .hex-input:focus {
+      outline: none;
+      background: rgba(0, 0, 0, 0.15);
+      border-color: white; }
 
 /*# sourceMappingURL=app.css.map */
