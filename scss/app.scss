@@ -15,6 +15,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  border: 1px solid white;
 
   div[class ^= swatch] {
     flex-grow: 1;

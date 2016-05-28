@@ -1,14 +1,9 @@
 'use strict'
 
 /*  Feature 1: Build a color matrix based on 4 colors and 2 steps */
-
-    // 2:
-    // I have 2 inputs: start and end. Both behave the same as specified in #1.
-
 window.onload = function(){
-  createSwatchInput('#color-sheet', 'start', '055aaa');
-  createSwatchInput('#color-sheet', 'end', 'bbb334');
-  interpolateSwatch('#start', '#end', 5);
+  init();
+  document.control.rows.addEventListener('change', updateStep, false);
 }
 
 // A: Color Interpolation Between 2 Color Inputs and 1 Step Input
@@ -45,6 +40,14 @@ function createSwatchInput(selector, id, color) {
   };
 }
 
+// 2:
+// I have 2 inputs: start and end. Both behave the same as specified in #1.
+function init(){
+  createSwatchInput('#color-sheet', 'start', '575aFa');
+  createSwatchInput('#color-sheet', 'end', 'bF75A7');
+  interpolateSwatch('#start', '#end', 6);
+}
+
 // 3:
 // The system returns 5 colors between start and end colors, using chroma.scale(['start', 'end']).colors(5)
 function interpolateSwatch(selector_1, selector_2, step) {
@@ -69,8 +72,8 @@ function interpolateSwatch(selector_1, selector_2, step) {
 function updateInterpolation(){
   var start = document.querySelector('#start').dataset.color,
       end   = document.querySelector('#end').dataset.color,
-      list = chroma.scale([start, end]).colors(5),
-      divs = document.querySelectorAll('#color-sheet div');
+      divs = document.querySelectorAll('#color-sheet div'),
+      list = chroma.scale([start, end]).colors(divs.length);
 
   list.forEach(function(co, i, list){
       divs[i].style.background = co;
@@ -86,14 +89,24 @@ function lumaContrast(c) {
   var flip = chroma(c).luminance() > 0.45 ? 0 : 1;
   return chroma(c).luminance(flip);
 }
-
-
-
-
-
-
     // 4:
     // I can specify an integer n (n>3), the system returns n colors between start and end.
+
+function updateStep() {
+  var steps = document.control.rows.value;
+  document.querySelector("#for_rows").innerHTML = steps - 2;
+  resetColorSheet();
+  interpolateSwatch("#start", "#end", +steps);
+}
+
+function resetColorSheet() {
+  var color_sheet = document.querySelector('#color-sheet');
+  var interpolated = document.querySelectorAll('.swatch-interpolated');
+
+  for (var i=0; i < interpolated.length; i++) {
+    color_sheet.removeChild(interpolated[i]);
+  }
+}
 
 // B: Color Interpolation With 3 Color Inputs and 2 Step Inputs
     // ...

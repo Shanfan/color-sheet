@@ -11,7 +11,8 @@ body {
 #color-sheet {
   height: 100vh;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  border: 1px solid white; }
   #color-sheet div[class^=swatch] {
     flex-grow: 1;
     display: flex;
