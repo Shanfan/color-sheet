@@ -29,7 +29,9 @@ function createSwatchInput(selector, id, color) {
   selector.appendChild(wrapper).appendChild(input);
 
   input.onkeyup = function(e){
-    var checkInput = this.value.length == 3 || this.value.length == 6 ? true : false;
+    var regex = /^[a-f\d]{6}\b|^[a-f\d]{3}\b/i,
+        checkInput = regex.exec(this.value) ? true : false;
+
     if (checkInput) {
       this.style.color = lumaContrast(this.value);
       this.parentElement.style.background = chroma(this.value);
