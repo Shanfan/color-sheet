@@ -1,3 +1,4 @@
+
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,600);
 
 * {
@@ -5,20 +6,19 @@
 }
 
 body {
-  font-size: 20px;
-  font-family: 'Source Code Pro', sans-serif;
+  font-size: 16px;
+  font-family: 'Source Code Pro', monospace;
   text-transform: uppercase;
   margin: 0;
 }
 
 #color-sheet {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   border: 1px solid white;
+  font-size: 1.2em;
 
   div[class ^= swatch] {
-    flex-grow: 1;
+    position: absolute;
 
     display: flex;
     align-items: center;
@@ -32,7 +32,8 @@ body {
   }
 
   .hex-input {
-    font-size: 1.2em;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1em;
     padding: 0.3em 0em 0.25em 0.25em;
     background: transparent;
     border: none;

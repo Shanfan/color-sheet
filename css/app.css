@@ -3,18 +3,17 @@
   box-sizing: border-box; }
 
 body {
-  font-size: 20px;
-  font-family: 'Source Code Pro', sans-serif;
+  font-size: 16px;
+  font-family: 'Source Code Pro', monospace;
   text-transform: uppercase;
   margin: 0; }
 
 #color-sheet {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid white; }
+  position: relative;
+  border: 1px solid white;
+  font-size: 1.2em; }
   #color-sheet div[class^=swatch] {
-    flex-grow: 1;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +22,8 @@ body {
     #color-sheet div[class^=swatch]:before {
       content: "#"; }
   #color-sheet .hex-input {
-    font-size: 1.2em;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1em;
     padding: 0.3em 0em 0.25em 0.25em;
     background: transparent;
     border: none;
