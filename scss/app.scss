@@ -6,19 +6,18 @@
 
 body {
   font-size: 20px;
-  font-family: 'Source Code Pro', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   text-transform: uppercase;
   margin: 0;
 }
 
 #color-sheet {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  height: 720px;
   border: 1px solid white;
 
   div[class ^= swatch] {
-    flex-grow: 1;
+    position: absolute;
 
     display: flex;
     align-items: center;

@@ -6,11 +6,24 @@ window.onload = function(){
   document.control.rows.addEventListener('change', updateStep, false);
 }
 
-// A: Color Interpolation Between 2 Color Inputs and 1 Step Input
-    // 1:
-    // As I type HEX color value in the input box, the input background change to the color I specified
-function createSwatchInput(selector, id, color) {
-  var selector = document.querySelector(selector);
+function init(){
+  var initSheet = {'up-left': {'color': '575aFa', 'row': '0', 'column': '0'},
+                   'low-left': {'color': 'bf75a7', 'row': '2', 'column': '0'},
+                   'up-right': {'color': 'dddddd', 'row': '0', 'column': '2'},
+                   'low-right': {'color': '000000', 'row': '2', 'column': '2'}};
+
+  for (var corner in initSheet) {
+    createSwatchInput('#color-sheet', corner, initSheet[corner].color, initSheet[corner].row, initSheet[corner].column);
+  }
+  //
+  // interpolateSwatch('#up-left', '#low-left', 3);
+  // interpolateSwatch('#up-left', '#up-right', 3);
+}
+
+function createSwatchInput(selector, id, color, row, column) {
+  var selector = document.querySelector(selector),
+      swatch_w = 33.333333333,
+      swatch_h = 240;
 
   var input = document.createElement('input');
   input.className = 'hex-input';
@@ -22,9 +35,22 @@ function createSwatchInput(selector, id, color) {
   var wrapper = document.createElement('div');
   wrapper.className = 'swatch';
   wrapper.id = id;
-  wrapper.style.background = chroma(color);
-  wrapper.style.color = lumaContrast(color);
   wrapper.dataset.color = chroma(color);
+  wrapper.dataset.row = row;
+  wrapper.dataset.column = column;
+
+  var wrapper_style = `
+    background: ${chroma(color)};
+    color: ${lumaContrast(color)};
+    width: ${swatch_w}%;
+    height: ${swatch_h}px;
+    top: ${row * swatch_h}px;
+    left: ${column * swatch_w}%;
+  `;
+
+  wrapper.style.cssText = wrapper_style;
+
+  console.log(wrapper.dataset)
 
   selector.appendChild(wrapper).appendChild(input);
 
@@ -42,16 +68,6 @@ function createSwatchInput(selector, id, color) {
   };
 }
 
-// 2:
-// I have 2 inputs: start and end. Both behave the same as specified in #1.
-function init(){
-  createSwatchInput('#color-sheet', 'start', '575aFa');
-  createSwatchInput('#color-sheet', 'end', 'bF75A7');
-  interpolateSwatch('#start', '#end', 6);
-}
-
-// 3:
-// The system returns 5 colors between start and end colors, using chroma.scale(['start', 'end']).colors(5)
 function interpolateSwatch(selector_1, selector_2, step) {
   var start = document.querySelector(selector_1),
       end = document.querySelector(selector_2),
@@ -91,8 +107,6 @@ function lumaContrast(c) {
   var flip = chroma(c).luminance() > 0.45 ? 0 : 1;
   return chroma(c).luminance(flip);
 }
-    // 4:
-    // I can specify an integer n (n>3), the system returns n colors between start and end.
 
 function updateStep() {
   var steps = document.control.rows.value;
