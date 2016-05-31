@@ -3,15 +3,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('autoprefixer'),
     sourcemaps   = require('gulp-sourcemaps'),
-    connect = require('gulp-connect');
-
-gulp.task('connect', function() {
-  connect.server({
-    root: '',
-    port: 3000,
-    livereload: true
-  });
-});
+    shell = require('gulp-shell');
 
 // Compile Stylesheets
 gulp.task('css', function () {
@@ -21,9 +13,12 @@ gulp.task('css', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss(processors))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./css/'))
-        .pipe(connect.reload());
+        .pipe(gulp.dest('./css/'));
 });
+
+gulp.task('sinatra', shell.task([
+  'ruby server.rb'
+]));
 
 // Watch Files For Changes
 gulp.task('watch', function() {
@@ -31,4 +26,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['css', 'watch', 'connect']);
+gulp.task('default', ['css', 'watch', 'sinatra']);
