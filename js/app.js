@@ -14,9 +14,8 @@ function init(){
 
   for (var corner in initSheet) {
     createSwatchInput('#color-sheet', corner, initSheet[corner].color, initSheet[corner].row, initSheet[corner].column);
-    console.log(corner, initSheet[corner]);
   }
-
+  //
   // interpolateSwatch('#up-left', '#low-left', 3);
   // interpolateSwatch('#up-left', '#up-right', 3);
 }
@@ -37,14 +36,21 @@ function createSwatchInput(selector, id, color, row, column) {
   wrapper.className = 'swatch';
   wrapper.id = id;
   wrapper.dataset.color = chroma(color);
-  wrapper.style.background = chroma(color);
-  wrapper.style.color = lumaContrast(color);
-  wrapper.style.width = swatch_w + '%';
-  wrapper.style.height = swatch_h + 'px';
-  wrapper.style.top = row * swatch_h + 'px';
-  wrapper.style.left = column * swatch_w + '%';
+  wrapper.dataset.row = row;
+  wrapper.dataset.column = column;
 
-  console.log(wrapper.style.top, wrapper.style.left)
+  var wrapper_style = `
+    background: ${chroma(color)};
+    color: ${lumaContrast(color)};
+    width: ${swatch_w}%;
+    height: ${swatch_h}px;
+    top: ${row * swatch_h}px;
+    left: ${column * swatch_w}%;
+  `;
+
+  wrapper.style.cssText = wrapper_style;
+
+  console.log(wrapper.dataset)
 
   selector.appendChild(wrapper).appendChild(input);
 
