@@ -4,14 +4,44 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Color Sheet </title>
   <link rel="stylesheet" href="css/app.css">
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/chroma-js/1.1.1/chroma.min.js"></script>
-  <script type='text/javascript' src='js/app.js'></script>
+  <script src="js/d3-jetpack.js"></script>
 </head>
 <body>
-  <form name="control" class="control">
-    <output id ="for_rows" for="rows">4</output>
-    <input type="range" name = "rows" id="rows" min="3" max="20" value="6">
-  </form>
-  <div id="color-sheet"></div>
+  <table id="control">
+    <tbody>
+      <tr>
+        <td rowspan="2">
+          <output id ="for_columns" for="columns">3</output>
+          <input orient="vertical" type="range" name = "columns" id="columns" min="3" max="20" value="3">
+        </td>
+        <td>
+          <input type="text" value="#FF9AFA">
+        </td>
+        <td>
+          <input type="text" value="#A175FF">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" value="#A175FF">
+        </td>
+        <td>
+          <input type="text" value="#001888">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="2">
+          <output id ="for_rows" for="rows">3</output>
+          <input type="range" name = "rows" id="rows" min="3" max="20" value="3">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table id="color-sheet"></table>
+
+  <script type='text/javascript' src='js/app.js'></script>
 </body>
 </html>
