@@ -8,6 +8,9 @@ body {
   text-transform: uppercase;
   margin: 0; }
 
+table td {
+  transition: all 1s; }
+
 #color-sheet {
   position: relative;
   border: 1px solid white;
@@ -17,8 +20,6 @@ body {
   text-align: center;
   vertical-align: middle;
   border-collapse: collapse; }
-  #color-sheet .swatch {
-    transition: all 1s; }
 
 input[type=range][orient=vertical] {
   -webkit-writing-mode: bt-lr;
@@ -32,16 +33,20 @@ input[type=range][orient=vertical] {
   padding: 0 5px; }
 
 .color-input {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 1em;
-  padding: 0.3em 0em 0.25em 0.25em;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-  text-transform: uppercase; }
-  .color-input:focus {
-    outline: none;
-    background: rgba(0, 0, 0, 0.15);
-    border-color: white; }
+  padding: 3em; }
+  .color-input:before {
+    content: "#"; }
+  .color-input input {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1em;
+    padding: 0.3em 0em 0.25em 0.25em;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    text-transform: uppercase; }
+    .color-input input:focus {
+      outline: none;
+      background: rgba(0, 0, 0, 0.15);
+      border-color: white; }
 
 /*# sourceMappingURL=app.css.map */
