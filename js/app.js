@@ -47,10 +47,8 @@ colInput.on('change', function() {
 
 d3.select('#show_text').on('change', function(){
   if(this.checked){
-    console.log("checked!");
     d3.selectAll('.swatch').style('color', function(d){return lumaContrast(d)});
   }else {
-    console.log("no!");
     d3.selectAll('.swatch').style('color', 'transparent');
   }
 });
@@ -70,7 +68,13 @@ function plotColorSheet() {
   colorSheetCol.text(function(d){return d;})
                 .style({
                   'background': function(d) {return chroma(d)},
-                  'color': function(d) {return lumaContrast(d)}
+                  'color': function(d) {
+                    if (document.querySelector('#show_text').checked) {
+                      return lumaContrast(d);
+                    }else {
+                      return "transparent";
+                    }
+                  }
                 });
 
   // If there's more columns:
@@ -78,7 +82,13 @@ function plotColorSheet() {
       .text(function(d){return d;})
       .style({
         'background': function(d) {return chroma(d)},
-        'color': function(d) {return lumaContrast(d)}
+        'color': function(d) {
+          if (document.querySelector('#show_text').checked) {
+            return lumaContrast(d);
+          }else {
+            return "transparent";
+          }
+        }
       });
 
   // If there's more rows:
@@ -89,7 +99,13 @@ function plotColorSheet() {
     .text(function(d){return d;})
     .style({
       'background': function(d) {return chroma(d)},
-      'color': function(d) {return lumaContrast(d)}
+      'color': function(d) {
+        if (document.querySelector('#show_text').checked) {
+          return lumaContrast(d);
+        }else {
+          return "transparent";
+        }
+      }
     });
 
   colorSheetCol.exit().remove();
