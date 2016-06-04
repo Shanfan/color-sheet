@@ -17,7 +17,6 @@ colorInputs.forEach(function(input){
 
 plotColorSheet();
 
-
 // Taking user inputs
 colorInputs.on('keyup', function() {
     var regex = /^[a-f\d]{6}\b|^[a-f\d]{3}\b/i,
@@ -44,7 +43,17 @@ rowInput.on('change', function() {
 colInput.on('change', function() {
   d3.select('#for_columns').text(this.value);
   plotColorSheet();
-})
+});
+
+d3.select('#show_text').on('change', function(){
+  if(this.checked){
+    console.log("checked!");
+    d3.selectAll('.swatch').style('color', function(d){return lumaContrast(d)});
+  }else {
+    console.log("no!");
+    d3.selectAll('.swatch').style('color', 'transparent');
+  }
+});
 
 
 
@@ -54,7 +63,6 @@ function plotColorSheet() {
       cols = +document.querySelector('#columns').value,
       sheetColors = interpolateMatrix(colors, rows, cols);
 
-  console.log(rows, cols);
   var colorSheetRow =  colorSheet.selectAll('tr').data(sheetColors),
       colorSheetCol = colorSheetRow.selectAll('td').data(function(d){return d;});
 
@@ -92,7 +100,7 @@ function plotColorSheet() {
 
 // Helper functions
 function lumaContrast(c) {
-  var flip = chroma(c).luminance() > 0.45 ? 0 : 1;
+  var flip = chroma(c).luminance() > 0.5 ? 0.1 : 0.9;
   return chroma(c).luminance(flip);
 }
 
