@@ -1,5 +1,7 @@
 var colorSheet = d3.select('#color-sheet'),
-    colorInputs = d3.selectAll('.color-input').selectAll('input').data(getColors());
+    colorInputs = d3.selectAll('.color-input').selectAll('input').data(getColors()),
+    rowInput = d3.select('#rows'),
+    colInput = d3.select('#columns');
 
 // Initial Setup
 colorInputs.forEach(function(input){
@@ -13,7 +15,7 @@ colorInputs.forEach(function(input){
   });
 });
 
-plotColorSheet(getColors(), 3, 3);
+plotColorSheet();
 
 
 // Taking user inputs
@@ -30,9 +32,69 @@ colorInputs.on('keyup', function() {
         'color': lumaContrast(this.value)
       });
 
-      plotColorSheet(getColors(), 3, 3);
+      plotColorSheet();
     }
   });
+
+rowInput.on('change', function() {
+  d3.select('#for_rows').text(this.value);
+  plotColorSheet();
+});
+
+colInput.on('change', function() {
+  d3.select('#for_columns').text(this.value);
+  plotColorSheet();
+})
+
+
+
+function plotColorSheet() {
+  var colors = getColors(),
+      rows = +document.querySelector('#rows').value,
+      cols = +document.querySelector('#columns').value,
+      sheetColors = interpolateMatrix(colors, rows, cols);
+
+  console.log(rows, cols);
+  var colorSheetRow =  colorSheet.selectAll('tr').data(sheetColors),
+      colorSheetCol = colorSheetRow.selectAll('td').data(function(d){return d;});
+
+  // Update the existing ones:
+  colorSheetCol.text(function(d){return d;})
+                .style({
+                  'background': function(d) {return chroma(d)},
+                  'color': function(d) {return lumaContrast(d)}
+                });
+
+  // If there's more columns:
+  colorSheetCol.enter().append('td.swatch')
+      .text(function(d){return d;})
+      .style({
+        'background': function(d) {return chroma(d)},
+        'color': function(d) {return lumaContrast(d)}
+      });
+
+  // If there's more rows:
+  colorSheetRow.enter()
+    .append('tr').selectAll('td')
+    .data(function(d){return d;}).enter()
+    .append('td.swatch')
+    .text(function(d){return d;})
+    .style({
+      'background': function(d) {return chroma(d)},
+      'color': function(d) {return lumaContrast(d)}
+    });
+
+  colorSheetCol.exit().remove();
+	colorSheetRow.exit().remove();
+
+}
+
+
+// Helper functions
+function lumaContrast(c) {
+  var flip = chroma(c).luminance() > 0.45 ? 0 : 1;
+  return chroma(c).luminance(flip);
+}
 
 function getColors(){
   var colors = [];
@@ -42,39 +104,6 @@ function getColors(){
     colors.push(chroma(input.value));
   });
   return colors;
-}
-
-function plotColorSheet(colors, rows, cols) {
-  var sheetColors = interpolateMatrix(colors, rows, cols);
-  console.log(sheetColors);
-  var colorSheetData =  d3.select("#color-sheet").selectAll('tr').data(sheetColors);
-
-  colorSheetData.selectAll('td').data(function(d){return d;})
-    .text(function(d){return d;})
-    .style({
-      'background': function(d) {return chroma(d)},
-      'color': function(d) {return lumaContrast(d)}
-    });
-
-  colorSheetData.enter()
-    .append('tr').selectAll('td')
-    .data(function(d){console.log(d); return d;}).enter()
-    .append('td.swatch')
-    .text(function(d){return d;})
-    .style({
-      'background': function(d) {return chroma(d)},
-      'color': function(d) {return lumaContrast(d)}
-    });
-
-	colorSheetData.exit().remove();
-
-}
-
-
-// Helper functions
-function lumaContrast(c) {
-  var flip = chroma(c).luminance() > 0.45 ? 0 : 1;
-  return chroma(c).luminance(flip);
 }
 
 function interpolateMatrix(colorList, rows, cols) {
