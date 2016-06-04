@@ -1,6 +1,5 @@
 var colorSheet = d3.select('#color-sheet'),
-    colorInputs = d3.selectAll('.color-input').selectAll('input'),
-    initColors = [];
+    colorInputs = d3.selectAll('.color-input').selectAll('input').data(getColors());
 
 // Initial Setup
 colorInputs.forEach(function(input){
@@ -12,11 +11,9 @@ colorInputs.forEach(function(input){
   d3.select(input[0]).style({
     'color': lumaContrast(col)
   });
-  initColors.push(chroma(col));
 });
 
-var initData = interpolateMatrix(initColors, 8, 9);
-plotColorSheet(initData);
+plotColorSheet(getColors(), 3, 3);
 
 
 // Taking user inputs
@@ -32,8 +29,47 @@ colorInputs.on('keyup', function() {
       d3.select(this).style({
         'color': lumaContrast(this.value)
       });
+
+      plotColorSheet(getColors(), 3, 3);
     }
   });
+
+function getColors(){
+  var colors = [];
+  var inputs = d3.selectAll('.color-input input');
+
+  inputs[0].forEach(function(input){
+    colors.push(chroma(input.value));
+  });
+  return colors;
+}
+
+function plotColorSheet(colors, rows, cols) {
+  var sheetColors = interpolateMatrix(colors, rows, cols);
+  console.log(sheetColors);
+  var colorSheetData =  d3.select("#color-sheet").selectAll('tr').data(sheetColors);
+
+  colorSheetData.selectAll('td').data(function(d){return d;})
+    .text(function(d){return d;})
+    .style({
+      'background': function(d) {return chroma(d)},
+      'color': function(d) {return lumaContrast(d)}
+    });
+
+  colorSheetData.enter()
+    .append('tr').selectAll('td')
+    .data(function(d){console.log(d); return d;}).enter()
+    .append('td.swatch')
+    .text(function(d){return d;})
+    .style({
+      'background': function(d) {return chroma(d)},
+      'color': function(d) {return lumaContrast(d)}
+    });
+
+	colorSheetData.exit().remove();
+
+}
+
 
 // Helper functions
 function lumaContrast(c) {
@@ -58,18 +94,4 @@ function interpolateMatrix(colorList, rows, cols) {
   list.push(list4);
 
   return list;
-}
-
-function plotColorSheet(sheetColors) {
-
-  colorSheet.selectAll('tr')
-    .data(sheetColors).enter()
-    .append('tr').selectAll('td')
-    .data(function(d) {return d}).enter()
-    .append('td.swatch')
-    .text(function(d){return d;})
-    .style({
-      'background': function(d) {return chroma(d)},
-      'color': function(d) {return lumaContrast(d)}
-    });
 }
