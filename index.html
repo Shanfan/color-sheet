@@ -10,48 +10,51 @@
 </head>
 <body>
   <table id="color-sheet"></table>
-  <table id="control">
-    <tbody>
-      <tr>
-        <td rowspan="2">
-          <output id ="for_rows" for="rows">3</output>
-          <input orient="vertical" type="range" name = "rows" id="rows" min="2" max="20" value="3">
-        </td>
-        <td class="color-input">
-          <input id="color1" type="text" value="FFA666" size="6">
-        </td>
-        <td class="color-input">
-          <input id="color2" type="text" value="A175FF" size="6">
-        </td>
-      </tr>
-      <tr>
-        <td class="color-input">
-          <input id="color3" type="text" value="333456" size="6">
-        </td>
-        <td class="color-input">
-          <input id="color4" type="text" value="001888" size="6">
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="2">
-          <output id ="for_columns" for="columns">3</output>
-          <input type="range" name = "columns" id="columns" min="2" max="20" value="3">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="ui">
-  <input id="show_text" type="checkbox" checked="true">
-  <label for="show_text">Show Color Values</label>
-  </div>
-  <div class ="info">
-      <p>
-    A Cartesian solution for people who are bad at picking colors 😜, built with <a href="http://gka.github.io/chroma.js/" target="_blank">Chroma.js API</a>.
-  </p>
-    <p>A  nifty tool for palette designers who needs to quickly find out Hex values of the blending colors. Using the control box to the left, you can first define the values of the four corners, and then provide the steps you want on the vertical and horizontal axes. The sheet will provide the color values in between.</p>
-  </div>
+  <div class="wrapper">
+    <div class="ui">
+      <table id="control">
+        <tbody>
+          <tr>
+            <td rowspan="2">
+              <output id ="for_rows" for="rows">3</output>
+              <input orient="vertical" type="range" name = "rows" id="rows" min="2" max="20" value="3">
+            </td>
+            <td class="color-input">
+              <input id="color1" type="text" value="FFA666" size="6">
+            </td>
+            <td class="color-input">
+              <input id="color2" type="text" value="A175FF" size="6">
+            </td>
+          </tr>
+          <tr>
+            <td class="color-input">
+              <input id="color3" type="text" value="333456" size="6">
+            </td>
+            <td class="color-input">
+              <input id="color4" type="text" value="001888" size="6">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="2">
+              <output id ="for_columns" for="columns">3</output>
+              <input type="range" name = "columns" id="columns" min="2" max="20" value="3">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <input id="show_text" type="checkbox" checked="true">
+      <label for="show_text">Show Color Values</label>
+    </div>
+    <div class ="info">
+        <p>
+      A Cartesian solution for people who are bad at picking colors 😜, built with <a href="http://gka.github.io/chroma.js/" target="_blank">Chroma.js API</a>.
+    </p>
+      <p>A  nifty tool for palette designers who needs to quickly find out Hex values of the blending colors. Using the control box to the left, you can first define the values of the four corners, and then provide the steps you want on the vertical and horizontal axes. The sheet will provide the color values in between.</p>
+    </div>
 
+  </div>
 
   <script type='text/javascript' src='js/app.js'></script>
 </body>
